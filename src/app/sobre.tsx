@@ -1,19 +1,18 @@
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Sobre() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Conversor de Moedas</Text>
-            <View style={styles.hr}></View>
-            <View>
-                <Text>App de conversor de moedas feito para disciplina de dev mobile, com os seguintes conceitos apresentados:
-                </Text>
-            </View>
-            <View>
-                <Text>- Navegação FileBased</Text>
-                <Text>- Drawer, Tab navigations</Text>
-                <Text> -requisições a APIs</Text>
-            </View>
+            <Text style={styles.title}>Sobre o app</Text>
+            <Text style={styles.description}>
+                Aplicativo de conversão de moedas desenvolvido para a disciplina de
+                Desenvolvimento Mobile.
+            </Text>
+
+            <Text style={styles.subtitle}>Conceitos utilizados</Text>
+            <Text style={styles.item}>• Navegação baseada em arquivos</Text>
+            <Text style={styles.item}>• Navegação por Drawer e Tabs</Text>
+            <Text style={styles.item}>• Requisições a APIs</Text>
         </View>
     );
 }
@@ -21,19 +20,29 @@ export default function Sobre() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
+        marginTop:40,
+        paddingHorizontal: 32,
+        paddingVertical: 24,
     },
     title: {
+        fontSize: 24,
         fontWeight: "bold",
-        marginTop: 50,
-        fontSize: 20,
-        marginBottom: 10
-
+        textAlign: "center",
+        marginBottom: 16,
     },
-    hr: {
-        height: 3,
-        width: "80%",
-        backgroundColor: "black"
-
-    }
+    description: {
+        fontSize: 16,
+        lineHeight: 24,
+       
+        marginBottom: 28,
+    },
+    subtitle: {
+        fontSize: 17,
+        fontWeight: "bold",
+        marginBottom: 10,
+    },
+    item: {
+        fontSize: 16,
+        lineHeight: 28,
+    },
 });
