@@ -1,18 +1,23 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Drawer } from "expo-router/drawer";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function Layout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer>
+        <Drawer.Screen
+          name="index"
+          options={{ drawerLabel: "Início", title: "Início" }}
+        />
+        <Drawer.Screen
+          name="sobre"
+          options={{ drawerLabel: "Sobre", title: "Sobre" }}
+        />
+        <Drawer.Screen
+          name="moedas"
+          options={{ drawerLabel: "Moedas", title: "Moedas" }}
+        />
+      </Drawer>
+    </GestureHandlerRootView>
   );
 }
