@@ -9,9 +9,7 @@ export default function Inicio() {
         <Text style={styles.descricao}>
           Consulte valores e acompanhe a conversão entre diferentes moedas.
         </Text>
-        <View style={styles.hr} />
-        <Text style={styles.fraseDica}>Use o menu lateral para começar.</Text>
-        
+      
       </View>
     </View>
   );
@@ -48,17 +46,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 25,
     textAlign: "center",
-  },
-  hr: {
-    width: "50%",
-    height: 2,
-    alignSelf: "center",
-    backgroundColor: "#5D7569",
-    marginVertical: 24,
-  },
-  fraseDica: {
-    color: "#929292",
-    fontSize: 14,
-    textAlign: "center",
-  },
+  }
 });

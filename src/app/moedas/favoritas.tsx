@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { getMoedas } from '../api/getMoedas'
+import { getMoedas } from '../../api/moedas'
 
-export default function Moedas() {
+export default function Favoritas() {
 
   const [moedas, setMoedas] = useState<[string, string][]>([]);
 

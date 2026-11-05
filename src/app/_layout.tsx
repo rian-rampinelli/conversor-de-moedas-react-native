@@ -1,9 +1,11 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
+import { NavigationBar } from "expo-navigation-bar";
 
 export default function Layout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#212121" }}>
+      <NavigationBar  />
       <Drawer
         screenOptions={{
           headerStyle: { backgroundColor: "#212121" },

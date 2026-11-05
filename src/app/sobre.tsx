@@ -4,7 +4,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 export default function Sobre() {
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={{flex:1}}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: "#212121" }}>
                 <View style={styles.container}>
                     <View style={styles.main}>
                         <Text style={styles.brand}>CONVERSOR DE MOEDAS</Text>
@@ -13,8 +13,6 @@ export default function Sobre() {
                             Aplicativo de conversão de moedas desenvolvido para a disciplina de
                             Desenvolvimento Mobile.
                         </Text>
-
-                        <View style={styles.hr} />
 
                         <Text style={styles.subtitle}>Conceitos utilizados</Text>
                         <Text style={styles.item}>• Navegação baseada em arquivos</Text>
@@ -61,14 +59,9 @@ const styles = StyleSheet.create({
         lineHeight: 25,
         textAlign: "center",
     },
-    hr: {
-        width: "50%",
-        height: 2,
-        alignSelf: "center",
-        backgroundColor: "#5D7569",
-        marginVertical: 24,
-    },
+ 
     subtitle: {
+        marginTop:20,
         color: "#E5E5E5",
         fontSize: 17,
         fontWeight: "600",
