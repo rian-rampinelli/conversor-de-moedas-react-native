@@ -28,7 +28,7 @@ export default function Favoritas() {
   );
 
   async function removerFavorito(sigla: string) {
-    const atualizadas = moedas.filter(([codigo]) => codigo !== sigla);
+    const atualizadas = moedas.filter((item) => item[0] !== sigla);
     setMoedas(atualizadas);
     await salvarFavoritos(atualizadas);
   }
@@ -51,7 +51,6 @@ export default function Favoritas() {
               <Pressable
                 onPress={() => removerFavorito(sigla)}
                 accessibilityRole="button"
-                accessibilityLabel={`Remover ${nome} dos favoritos`}
                 hitSlop={10}
                 style={styles.favoriteButton}
               >

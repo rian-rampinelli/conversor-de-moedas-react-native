@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Text, View, StyleSheet, ScrollView, TextInput } from "react-native";
+import { useFocusEffect } from "expo-router";
 import { getMoedas } from "../../api/moedas";
 import { Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,25 +22,31 @@ export default function Favoritas() {
     listarMoedas();
   }, []);
 
-  useEffect(() => {
-    async function renderizarFavoritos() {
-      const favoritos = await carregarFavoritos()
-      setFavoritos(favoritos)
-    }
-    renderizarFavoritos();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      let ativa = true;
+
+      carregarFavoritos().then((salvos) => {
+        if (ativa) setFavoritos(salvos);
+      });
+
+      return () => {
+        ativa = false;
+      };
+    }, [])
+  );
 
   //remove e atualiza no storage
   async function alternarFavorito(moeda: [string, string]) {
-    const ehFavorita = favoritos.some(([sigla]) => sigla === moeda[0]);
+    const ehFavorita = favoritos.some((item) => item[0] === moeda[0]);
     //diferente do moeda[0] == sigla
-    const atualizados = ehFavorita ? favoritos.filter(([sigla]) => sigla !== moeda[0]):[...favoritos,moeda];
+    const atualizados = ehFavorita ? favoritos.filter((item) => item[0] !== moeda[0]):[...favoritos,moeda];
     setFavoritos(atualizados);
     await salvarFavoritos(atualizados);
   }
 
-  const moedasFiltradas = moedas.filter(([sigla]) =>
-    sigla.toLowerCase().startsWith(moedaProcurada.trim().toLowerCase())
+  const moedasFiltradas = moedas.filter((item) =>
+    item[0].toLowerCase().startsWith(moedaProcurada.trim().toLowerCase())
   );
 
   return (
@@ -74,7 +81,7 @@ export default function Favoritas() {
                 style={styles.favoriteButton}
               >
                 <Ionicons
-                  name={favoritos.some(([codigo]) => codigo === sigla) ? "star" : "star-outline"}
+                  name={favoritos.some((item) => item[0] === sigla) ? "star" : "star-outline"}
                   size={26}
                   color={favoritos.some(([codigo]) => codigo === sigla) ? "#F5C542" : "#A3A3A3"}
                 />
