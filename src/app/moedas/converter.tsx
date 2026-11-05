@@ -25,7 +25,7 @@ export default function Converter() {
         carregarMoedas();
     }, []);
 
-  
+
     async function converter() {
         const quantidade = Number(valor.replace(",", "."));
         if (!origem || !destino || !Number.isFinite(quantidade) || quantidade <= 0) {
@@ -103,7 +103,9 @@ export default function Converter() {
                     </Pressable>
                 </View>
 
-                {erro !== "" && <Text style={styles.error}>{erro}</Text>}
+                {erro !== "" &&
+                    <Text style={styles.error}>{erro}</Text
+                    >}
 
                 {resultado && (
                     <View style={styles.card}>
