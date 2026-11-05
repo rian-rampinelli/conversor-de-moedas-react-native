@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { Text, View, StyleSheet, ScrollView, TextInput } from "react-native";
 import { getMoedas } from "../../api/moedas";
+import { Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { carregarFavoritos, salvarFavoritos } from "../../api/favoritos";
 
 export default function Favoritas() {
 
   const [moedas, setMoedas] = useState<[string, string][]>([]);
   const [moedaProcurada, setMoedaProcurada] = useState("");
   const [carregando, setCarregando] = useState(true);
+  const [favoritos, setFavoritos] = useState<[string, string][]>([]);
 
   useEffect(() => {
     async function listarMoedas() {
@@ -16,6 +20,23 @@ export default function Favoritas() {
     }
     listarMoedas();
   }, []);
+
+  useEffect(() => {
+    async function renderizarFavoritos() {
+      const favoritos = await carregarFavoritos()
+      setFavoritos(favoritos)
+    }
+    renderizarFavoritos();
+  }, []);
+
+  //remove e atualiza no storage
+  async function alternarFavorito(moeda: [string, string]) {
+    const ehFavorita = favoritos.some(([sigla]) => sigla === moeda[0]);
+    //diferente do moeda[0] == sigla
+    const atualizados = ehFavorita ? favoritos.filter(([sigla]) => sigla !== moeda[0]):[...favoritos,moeda];
+    setFavoritos(atualizados);
+    await salvarFavoritos(atualizados);
+  }
 
   const moedasFiltradas = moedas.filter(([sigla]) =>
     sigla.toLowerCase().startsWith(moedaProcurada.trim().toLowerCase())
@@ -46,6 +67,18 @@ export default function Favoritas() {
                 <Text style={styles.sigla}>{sigla}</Text>
               </View>
               <Text style={styles.name}>{nome}</Text>
+              <Pressable
+                onPress={() => alternarFavorito([sigla, nome])}
+                accessibilityRole="button"
+                hitSlop={10}
+                style={styles.favoriteButton}
+              >
+                <Ionicons
+                  name={favoritos.some(([codigo]) => codigo === sigla) ? "star" : "star-outline"}
+                  size={26}
+                  color={favoritos.some(([codigo]) => codigo === sigla) ? "#F5C542" : "#A3A3A3"}
+                />
+              </Pressable>
             </View>
           ))
         ) : (
@@ -135,5 +168,11 @@ const styles = StyleSheet.create({
     color: "#E5E5E5",
     fontSize: 15,
     fontWeight: "500",
+  },
+  favoriteButton: {
+    minWidth: 36,
+    minHeight: 36,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
