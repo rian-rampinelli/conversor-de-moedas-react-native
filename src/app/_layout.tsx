@@ -4,7 +4,16 @@ import { Drawer } from "expo-router/drawer";
 export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer>
+      <Drawer
+        screenOptions={{
+          headerStyle: { backgroundColor: "#212121" },
+          headerTintColor: "#F5F5F5",
+          headerTitleStyle: { color: "#F5F5F5", fontWeight: "600" },
+          drawerStyle: { backgroundColor: "#212121" },
+          drawerActiveTintColor: "#B8D4C2",
+          drawerInactiveTintColor: "#B5B5B5",
+        }}
+      >
         <Drawer.Screen
           name="index"
           options={{ drawerLabel: "Início", title: "Início" }}
