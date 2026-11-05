@@ -163,14 +163,15 @@ export default function Converter() {
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
         backgroundColor: "#212121",
     },
     content: {
-        paddingTop: 20,
-        paddingBottom:20,
+        paddingRight: 20,
+        paddingLeft:20,
         marginTop:20,
         gap: 14,
     },
